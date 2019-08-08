@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Application" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="com.betinnapp.authservice.AuthServiceApplication" />
+    <module name="auth-service" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

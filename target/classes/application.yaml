@@ -1,0 +1,9 @@
+auth0:
+  audience: http://someadress.com.br
+
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://betinapp.auth0.com/
