@@ -1,9 +1,22 @@
-auth0:
-  audience: http://someadress.com.br
-
 spring:
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: https://betinapp.auth0.com/
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    driverClassName: org.postgresql.Driver
+    username: postgres
+    password: postgres
+
+  hikari:
+    connectionTimeout: 20000
+    maximumPoolSize: 5
+
+  jpa:
+    open-in-view: true
+    generate-ddl: true
+    show-sql: true
+    properties:
+      hibernate:
+        temp:
+          use_jdbc_metadata_defaults: false
+
+    hibernate:
+      ddl-auto: update

@@ -1,2 +1,12 @@
-.idea/libraries/
-.idea/workspace.xml
+!.idea
+.idea/*
+!.idea/runConfigurations
+projectName.iml
+/*.classpath
+/.classpath
+/.springBeans
+*.DS_Store
+*.iml
+/build
+/local.properties
+target/
