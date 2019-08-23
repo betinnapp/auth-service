@@ -1,7 +1,9 @@
 package com.betinnapp.userservice.service;
 
 import com.betinnapp.userservice.model.User;
+import com.betinnapp.userservice.model.UserDTO;
 import com.betinnapp.userservice.repository.UserRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,7 +25,9 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public User getUserToken(String email, String password) throws NotFoundException {
+    ObjectMapper mapper = new ObjectMapper();
+
+    public UserDTO getUserToken(String email, String password) throws NotFoundException {
 
         List<User> users = userRepository.findByEmail(email);
         User authenticatedUser = null;
@@ -44,6 +48,7 @@ public class UserService {
         user.setToken(random);
         userRepository.save(user);
 
-        return user;
+        UserDTO userDTO = mapper.convertValue(user, UserDTO.class);
+        return userDTO;
     }
 }

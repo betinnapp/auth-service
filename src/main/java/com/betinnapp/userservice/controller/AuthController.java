@@ -1,6 +1,7 @@
 package com.betinnapp.userservice.controller;
 
 import com.betinnapp.userservice.model.User;
+import com.betinnapp.userservice.model.UserDTO;
 import com.betinnapp.userservice.service.UserService;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class AuthController {
 
     @CrossOrigin
     @PostMapping(path = "/login")
-    public User getUserById(@RequestHeader(name = "authorization") String authorization) throws NotFoundException {
+    public UserDTO getUserById(@RequestHeader(name = "authorization") String authorization) throws NotFoundException {
 
         byte[] decode = Base64.getDecoder().decode(authorization.replace("Basic ", ""));
         String decodedString = new String(decode);
