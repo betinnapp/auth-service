@@ -32,8 +32,8 @@ public class UserService {
         List<User> users = userRepository.findByEmail(email);
         User authenticatedUser = null;
 
-        for (User u : users){
-            if (passwordEncoder.matches(password, u.getPassword())){
+        for (User u : users) {
+            if (passwordEncoder.matches(password, u.getPassword())) {
                 authenticatedUser = u;
             }
         }
@@ -42,13 +42,11 @@ public class UserService {
             throw new NotFoundException("USER_NOT_FOUND");
         }
 
-
         UUID random = UUID.randomUUID();
         User user = users.get(0);
         user.setToken(random);
         userRepository.save(user);
 
-        UserDTO userDTO = mapper.convertValue(user, UserDTO.class);
-        return userDTO;
+        return mapper.convertValue(user, UserDTO.class);
     }
 }
