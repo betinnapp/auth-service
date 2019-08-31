@@ -1,19 +1,15 @@
-package com.betinnapp.userservice.service;
+package com.betinnapp.authservice.service;
 
-import com.betinnapp.userservice.model.User;
-import com.betinnapp.userservice.model.UserDTO;
-import com.betinnapp.userservice.repository.UserRepository;
+import com.betinnapp.authservice.model.User;
+import com.betinnapp.authservice.model.dto.UserDTO;
+import com.betinnapp.authservice.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
-import java.nio.charset.Charset;
-import java.security.SecureRandom;
 import java.util.List;
-import java.util.Random;
 import java.util.UUID;
 
 @Service

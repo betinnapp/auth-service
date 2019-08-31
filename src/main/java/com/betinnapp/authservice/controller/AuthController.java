@@ -1,17 +1,12 @@
-package com.betinnapp.userservice.controller;
+package com.betinnapp.authservice.controller;
 
-import com.betinnapp.userservice.model.User;
-import com.betinnapp.userservice.model.UserDTO;
-import com.betinnapp.userservice.service.UserService;
+import com.betinnapp.authservice.model.dto.UserDTO;
+import com.betinnapp.authservice.service.UserService;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import java.util.Base64;
-import java.util.UUID;
 
 @RestController
 @RequestMapping(path = "auth")

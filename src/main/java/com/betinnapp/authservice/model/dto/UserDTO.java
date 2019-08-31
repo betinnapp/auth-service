@@ -1,4 +1,4 @@
-package com.betinnapp.userservice.model;
+package com.betinnapp.authservice.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -11,8 +11,10 @@ public class UserDTO {
     private UUID id;
     private String firstName;
     private String lastName;
+    private String shortName;
     private String email;
     private Date birthDate;
+    private Boolean work;
     private String preferences;
     private UUID token;
 
@@ -70,5 +72,21 @@ public class UserDTO {
 
     public void setToken(UUID token) {
         this.token = token;
+    }
+
+    public String getShortName() {
+        return shortName;
+    }
+
+    public void setShortName(String shortName) {
+        this.shortName = shortName;
+    }
+
+    public Boolean getWork() {
+        return work;
+    }
+
+    public void setWork(Boolean work) {
+        this.work = work;
     }
 }

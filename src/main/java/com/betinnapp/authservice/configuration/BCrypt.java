@@ -1,4 +1,4 @@
-package com.betinnapp.userservice.configuration;
+package com.betinnapp.authservice.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

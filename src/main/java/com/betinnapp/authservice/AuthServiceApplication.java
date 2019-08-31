@@ -1,4 +1,4 @@
-package com.betinnapp.userservice;
+package com.betinnapp.authservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
