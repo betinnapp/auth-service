@@ -15,34 +15,31 @@ import java.util.UUID;
 @Service
 public class UserService {
 
-    @Autowired
-    UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
-    ObjectMapper mapper = new ObjectMapper();
+    private final ObjectMapper objectMapper;
+
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, ObjectMapper objectMapper) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.objectMapper = objectMapper;
+    }
 
     public UserDTO getUserToken(String email, String password) throws NotFoundException {
-
         List<User> users = userRepository.findByEmail(email);
-        User authenticatedUser = null;
 
-        for (User u : users) {
-            if (passwordEncoder.matches(password, u.getPassword())) {
-                authenticatedUser = u;
-            }
-        }
-
-        if (authenticatedUser == null) {
+        if (users.stream().noneMatch(u -> passwordEncoder.matches(password, u.getPassword()))) {
             throw new NotFoundException("USER_NOT_FOUND");
         }
 
         UUID random = UUID.randomUUID();
         User user = users.get(0);
         user.setToken(random);
+
         userRepository.save(user);
 
-        return mapper.convertValue(user, UserDTO.class);
+        return objectMapper.convertValue(user, UserDTO.class);
     }
 }

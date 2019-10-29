@@ -1,0 +1,61 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/openjdk:11.0.1-jdk
+
+    working_directory: ~/auth-service
+
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+              - "4f:b6:82:c8:50:2c:00:7b:75:bd:31:d9:30:68:3a:c2"
+
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - auth-service-{{ checksum "pom.xml" }}
+
+      # Switch to offline dependency resolver
+      - run: mvn dependency:go-offline
+
+      # Save maven cache locally
+      - save_cache:
+          key: auth-service-{{ checksum "pom.xml" }}
+          paths:
+            - ~/.m2
+
+      # package into a jar
+      - run: mvn clean package
+
+      # Configure git username
+      - run: git config user.name "CI"
+
+      # Configure git email
+      - run: git config user.email "noreply@betinnapp.com"
+
+      # prepare maven release
+      - run: mvn -B -Dresume=false release:prepare
+
+      # Perform release
+      - run: mvn -Dmaven.deploy.skip=true release:perform
+
+      # build and push docker image to docker hub
+      - run: mvn -Djib.to.auth.username=$DOCKER_USER -Djib.to.auth.password=$DOCKER_PASS clean compile jib:build
+
+      # store raw contents of src code
+      - store_artifacts:
+          path: target/classes
+          destination: auth-service
+
+workflows:
+  version: 2
+  build-deploy:
+      jobs:
+        - build:
+            context: Backend
+            filters:
+              branches:
+                only: master
