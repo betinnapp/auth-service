@@ -111,4 +111,10 @@
 		</plugins>
 	</build>
 
+	<scm>
+		<developerConnection>scm:git:git@github.com:betinnapp/auth-service.git</developerConnection>
+		<url>https://github.com/betinnapp/auth-service</url>
+		<tag>HEAD</tag>
+	</scm>
+
 </project>
