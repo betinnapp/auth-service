@@ -12,13 +12,15 @@ import java.util.Base64;
 @RequestMapping(path = "auth")
 public class AuthController {
 
-    @Autowired
-    UserService userService;
+    private final UserService userService;
+
+    public AuthController(UserService userService) {
+        this.userService = userService;
+    }
 
     @CrossOrigin
     @PostMapping(path = "/login")
     public UserDTO getUserById(@RequestHeader(name = "authorization") String authorization) throws NotFoundException {
-
         byte[] decode = Base64.getDecoder().decode(authorization.replace("Basic ", ""));
         String decodedString = new String(decode);
         String[] split = decodedString.split(":");
